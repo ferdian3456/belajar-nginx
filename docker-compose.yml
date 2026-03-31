@@ -1,0 +1,10 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80" # Akses via localhost:8080, tidak conflict dengan port 80 lokal
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./html:/usr/share/nginx/html:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # agar bisa reverse proxy ke ip local os, jadi nginxnya bisa tahu ipnya
